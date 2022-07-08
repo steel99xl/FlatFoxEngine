@@ -307,8 +307,8 @@ void TestWorld::PhysicsUpdate(float MaxUpdateSpeed){
         BasicPhysics.SetUpdateTime(MaxUpdateSpeed);
         BasicPhysics.Update(FlatFoxPhysics::NormalizeVectorOfForceDirection(m_NewPlayerDirection));
         AdvancedCam.Update(MaxUpdateSpeed, (float)m_Width/m_Height, m_FOV);
-        m_Projection = AdvancedCam.GetProj();
-        m_View = AdvancedCam.GetView();
+        //AdvancedCam.GetProj(); = AdvancedCam.GetProj();
+        //AdvancedCam.GetView(); = AdvancedCam.GetView();
         m_3dCamPos = AdvancedCam.GetCurrentPos();
 
         //FlatFoxPhysics::ForceDirection PlayerMovmentDirection = BasicPhysics.NormalizeVectorOfForceDirection(m_NewPlayerDirection);
@@ -351,7 +351,7 @@ void TestWorld::OnUpdate(float deltaTime, float width, float height, float scale
         
 
         // This is only going here just so i have a clear spot for it
-        //m_View = glm::lookAt(
+        //AdvancedCam.GetView(); = glm::lookAt(
         //m_pos, // Camera is at (4,3,3), in World Space
         //m_look, // and looks at the origin
         //glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
@@ -539,7 +539,7 @@ void TestWorld::OnRender(){
         //Sun.BindBufferData();
         //Sun.SetColor(1.0f,0.9059f,0.0f, 1.0f);
         
-        Sun.SetDrawPos(m_Projection, m_View);
+        Sun.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
         //Sun.SetLight(Sun.GetLightColor(), Sun.GetPos());
         Sun.Paint();
 
@@ -547,19 +547,19 @@ void TestWorld::OnRender(){
 
         //Land.BindBufferData();
         
-        Land.SetDrawPos(m_Projection, m_View);
+        Land.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
         Land.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         Land.SetLight(OtherSuns.GetLightInfo(), OtherSuns.GetPos(), m_3dCamPos, 1);
         Land.Paint();
 
-        Platform.SetDrawPos(m_Projection, m_View);
+        Platform.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
         Platform.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         Platform.SetLight(OtherSuns.GetLightInfo(), OtherSuns.GetPos(), m_3dCamPos, 1);
         Platform.Paint();
 
 
         OtherSuns.BindBufferData();
-        OtherSuns.SetDrawPos(m_Projection, m_View);
+        OtherSuns.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
         //OtherSuns.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         OtherSuns.Paint();
 
@@ -567,7 +567,7 @@ void TestWorld::OnRender(){
         TealBlock.BindBufferData();
         //TealBlock.SetColor(0.471f, 0.318f, 0.176f, 1.0f);
         
-        TealBlock.SetDrawPos(m_Projection,m_View);
+        TealBlock.SetDrawPos(AdvancedCam.GetProj();,AdvancedCam.GetView(););
         TealBlock.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         TealBlock.SetLight(OtherSuns.GetLightInfo(), OtherSuns.GetPos(), m_3dCamPos, 1);
         TealBlock.Paint();
@@ -577,7 +577,7 @@ void TestWorld::OnRender(){
         //Using this cube as as temp player for colision detection
         // This is only going to check colision with the single Land Object (IE the ground);
         // The position is only being set first so i can just call the cube object
-        PlayerBlock.SetDrawPos(m_Projection, m_View);
+        PlayerBlock.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
         if(PlayerBlock.GetColision()){
             PlayerBlock.SetColor(1.0f,0.0f,0.0f, 1.0f);
         } else {

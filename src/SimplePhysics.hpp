@@ -340,7 +340,7 @@ namespace FlatFoxPhysics {
             this->CustomReactionList.erase(this->CustomReactionList.begin() + type);
         }
         const std::vector<unsigned int> *ExportCollisionTypes(){
-           return &this->CustomReactionList;
+            return &this->CustomReactionList;
         }
 
         void SetParentCollisionList(const std::vector<unsigned int> *TypeList){
@@ -428,52 +428,39 @@ namespace FlatFoxPhysics {
 
         std::vector<PhysicsLine> QuadsToLines(std::vector<QuadPhysicsBody> Object);
 
-        void FullQuadLineColisionVoid(std::vector<PhysicsLine> ObjectALines, PhysicsPos ObjectAPos,
-                                      std::vector<PhysicsLine> ObjectBLines, PhysicsPos ObjectBPos, float Offset,
-                                      ColisionInfo *Output);
+        void FullQuadLineColisionVoid(std::vector<PhysicsLine> ObjectALines, PhysicsPos ObjectAPos, std::vector<PhysicsLine> ObjectBLines, PhysicsPos ObjectBPos, float Offset, ColisionInfo *Output);
 
-        ColisionInfo FullQuadLineColision(std::vector<PhysicsLine> ObjectALines, PhysicsPos ObjectAPos,
-                                          std::vector<PhysicsLine> ObjectBLines, PhysicsPos ObjectBPos, float Offset);
+        ColisionInfo FullQuadLineColision(std::vector<PhysicsLine> ObjectALines, PhysicsPos ObjectAPos, std::vector<PhysicsLine> ObjectBLines, PhysicsPos ObjectBPos, float Offset);
 
-        void QuadBodyColision(std::vector<QuadPhysicsBody> ObjectA, PhysicsPos ObjectAPos,
-                              std::vector<QuadPhysicsBody> ObjectB, PhysicsPos ObjectBPos, ColisionInfo *Output,
-                              float OffSet = 0.0f);
+        void QuadBodyColision(std::vector<QuadPhysicsBody> ObjectA, PhysicsPos ObjectAPos, std::vector<QuadPhysicsBody> ObjectB, PhysicsPos ObjectBPos, ColisionInfo *Output, float OffSet = 0.0f);
         // Helper functions to make QuadBodyColisoin faster if possible, lol
 
         // Used for making a vector of PhysicsPoints translated to world space;
         void QuadPosToPoints(std::vector<QuadPhysicsBody> Object, PhysicsPos ObjectPos, std::vector<PhysicsPoint> *Output);
 
         // With Normal
-        void QuadPosToPointsNormal(std::vector<QuadPhysicsBody> Object, PhysicsPos ObjectPos,
-                                   std::vector<PhysicsLine> *Output);
+        void QuadPosToPointsNormal(std::vector<QuadPhysicsBody> Object, PhysicsPos ObjectPos, std::vector<PhysicsLine> *Output);
 
         // Normalizes returns normal for ObjectBs points pointing twords ObjectAs points
-        void PointsToPointsNormal(std::vector<PhysicsPos> ObjectA, std::vector<PhysicsPos> ObjectB,
-                                  std::vector<PhysicsPos> *Output);
+        void PointsToPointsNormal(std::vector<PhysicsPos> ObjectA, std::vector<PhysicsPos> ObjectB, std::vector<PhysicsPos> *Output);
 
         // Effectivly the samthing as the Normal one but for indevidual Positions
         void PointToPoint(PhysicsPos *ObjectA, PhysicsPos *ObjectB, PhysicsPos *Output);
 
-        void LinesToLines(std::vector<PhysicsLine> *ObjectA, std::vector<PhysicsLine> *ObjectB,
-                          std::vector<PhysicsLine> *Output);
+        void LinesToLines(std::vector<PhysicsLine> *ObjectA, std::vector<PhysicsLine> *ObjectB, std::vector<PhysicsLine> *Output);
 
         //Currently breaks on the Z axis (it only works in 2d some how...)
-        ColisionInfo
-        SATColision(std::vector<QuadPhysicsBody> ObjectA, PhysicsPos ObjectAPos, std::vector<QuadPhysicsBody> ObjectB,
-                    PhysicsPos ObjectBPos);
+        ColisionInfo SATColision(std::vector<QuadPhysicsBody> ObjectA, PhysicsPos ObjectAPos, std::vector<QuadPhysicsBody> ObjectB, PhysicsPos ObjectBPos);
 
         // The returned minmax is based on world cordinates
         std::vector<PlaneMinMax> MinMaxFromQuads(std::vector<QuadPhysicsBody> Object, PhysicsPos ObjectPos);
 
         // This Function only does the comparison 1 way : PointsA to BoxB
-        ColisionInfo PointsToAABBColision(std::vector<QuadPhysicsBody> ObjectA, PhysicsPos ObjectAPos,
-                                          std::vector<PlaneMinMax> ObjectB);
+        ColisionInfo PointsToAABBColision(std::vector<QuadPhysicsBody> ObjectA, PhysicsPos ObjectAPos, std::vector<PlaneMinMax> ObjectB);
 
-        void AABBColision(std::vector<QuadPhysicsBody> &ObjectA, PhysicsPos &ObjectAPos,
-                          std::vector<QuadPhysicsBody> &ObjectB, PhysicsPos &ObjectBPos, ColisionInfo *Output);
+        void AABBColision(std::vector<QuadPhysicsBody> &ObjectA, PhysicsPos &ObjectAPos, std::vector<QuadPhysicsBody> &ObjectB, PhysicsPos &ObjectBPos, ColisionInfo *Output);
 
-        void SphearColison(PhysicsPos ObjectAPos, float ObjectASize, PhysicsPos ObjectBPos, float ObjectBSize,
-                           ColisionInfo *Output);
+        void SphearColison(PhysicsPos ObjectAPos, float ObjectASize, PhysicsPos ObjectBPos, float ObjectBSize, ColisionInfo *Output);
 
         // IDK why i didn't make this earlier... 
         float PointToPointDistance(PhysicsPos PointeA, PhysicsPos PointB);

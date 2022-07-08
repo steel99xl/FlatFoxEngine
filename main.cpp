@@ -52,6 +52,7 @@ int main(){
     std::cout << glGetString(GL_VERSION) << std::endl;
     std::cout << "GL_SHADING_LANGUAGE_VERSION: " << glGetString (GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
+    
 
     World.Setup();
     //World.m_running = true;
@@ -59,14 +60,6 @@ int main(){
     std::thread PhysicsThread(SecondThread,12);
     PhysicsThread.detach();
     std::cout << "Physics Thread Running..." << std::endl;
-
-    // Yes the KeyCallBack and MouseCallBack must be a function in main (or where ever you have the ability to call) or you can handle passing a static pointer from a class to it.
-    /*
-    glfwSetKeyCallback(window.GetWindow(), KeyCallBack);
-    glfwSetCursorPosCallback(window.GetWindow(), MousePosCallBack);
-    glfwSetMouseButtonCallback(window.GetWindow(), MouseButtonCallBack);
-    glfwSetInputMode(window.GetWindow(), GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
-    */
     
 
     // Draw LOOP

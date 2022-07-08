@@ -28,3 +28,24 @@
 #include "Camera.hpp"
 #include "FrameBufferObject.hpp"
 #include "FlatFoxWindow.hpp"
+
+namespace FlatFoxEngine{
+    class Engine{
+        protected:
+        FlatFoxWorld::SimpleWorld *m_World;
+        FlatFoxWindow::Window *m_Window;
+
+        public:
+
+            inline Engine(){};
+            inline ~Engine(){};
+
+            //This function will house the internal managment for the physics thread (Physics engine provided by m_World)
+            inline void PhysicsThreadManagment(){};
+
+            inline void Setup(){};
+
+            // Does the things
+            inline void Run(){};
+    }
+}
