@@ -29,8 +29,6 @@ Window::~Window(){
 
 void Window::Update(){
     m_CurrentFrameTime = glfwGetTime();
-    m_DeltaTime = m_CurrentFrameTime - m_LastFrameTime;
-    m_LastFrameTime = m_CurrentFrameTime;
 
     m_Keys = hexmap.GetKeyPress();
 
@@ -93,17 +91,34 @@ void Window::Update(){
         Window::WindowThreadSleep();
     }
 
+    
+
 }
 
 void Window::SetSeenRender(){
     glViewport(0, 0, Window::GetScaledWidth(), Window::GetScaledHeight());
+
+    //m_FBO.Update((int)this->GetScaledWidth,(int)m_Height,(int)m_Scale);
 }
 
 void Window::SetPosFXRender(){
     glViewport(0, 0, m_Width * m_OSScale, m_Height * m_OSScale);
+
+    /*
+    glActiveTexture(GL_TEXTURE0);
+        //glBindTexture(GL_TEXTURE_2D, FrameBuffTexture);
+    glBindTexture(GL_TEXTURE_2D, m_FBO.GetTexture());
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    GLCall(glDisable(GL_DEPTH_TEST)); 
+    Frame.BindBufferData();
+    Frame.Paint();
+    */
+
 }
 
 void Window::SwapRenderBuffer(){
+    m_DeltaTime = m_CurrentFrameTime - m_LastFrameTime;
+    m_LastFrameTime = m_CurrentFrameTime;
     glfwSwapBuffers(m_Window);
 }
 

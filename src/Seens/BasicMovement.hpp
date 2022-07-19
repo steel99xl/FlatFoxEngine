@@ -20,10 +20,11 @@ class TestWorld{
 
         //float m_yaw, m_pitch, m_lastX, m_lastY;
         // These are stored as floats so the rounding can be ajusted
-        float m_Width, m_Height, m_Scale;
+        float m_Width, m_Height;
+        float m_Scale = 1.0f;
 
         FrameBufferObject m_FBO;
-        FlatFoxObject::SimpleObject Frame;
+        //FlatFoxObject::SimpleObject Frame;
 
         double m_MouseX = 0.0, m_MouseY = 0.0;
 

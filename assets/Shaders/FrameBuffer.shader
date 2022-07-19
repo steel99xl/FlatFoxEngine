@@ -12,24 +12,6 @@ in vec2 v_TexCord;
 
 uniform sampler2D u_Texture;
 
-uniform Size u_Size;
-
-
-float offsetX = 1.0f / u_Size.width;
-float offsetY = 1.0f / u_Size.height;
-
-vec2 offsets[9] = vec2[](
-    vec2(-offsetX, offsetY), vec2(0.0f, offsetY), vec2(offsetX, offsetY),
-    vec2(-offsetX, 0.0f),   vec2(0.0f, 0.0f),   vec2(offsetX, 0.0f),
-    vec2(-offsetX, -offsetY), vec2(0.0f, -offsetY), vec2(offsetX, -offsetY)
-);
-
-float kernel[9] = float[](
-    0,1,0,
-    1,-2,1,
-    0,1,0
-);
-
 void main(){
     
 

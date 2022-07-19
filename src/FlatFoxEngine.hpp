@@ -29,6 +29,7 @@
 #include "FrameBufferObject.hpp"
 #include "FlatFoxWindow.hpp"
 
+
 namespace FlatFoxEngine{
     class Engine{
         protected:
@@ -46,6 +47,26 @@ namespace FlatFoxEngine{
             inline void Setup(){};
 
             // Does the things
-            inline void Run(){};
-    }
+            inline void Run(){
+                while(m_Window->IsOpen()){
+                    m_Window->Update();
+
+                    m_World->SetKeyArray(m_Window->GetKeyArray());
+                    m_World->SetMouseButtonArray(m_Window->GetMouseButtonArray());
+                    m_World->SetMousePos(m_Window->GetMousePos());
+
+                    m_World->TheRealManagedUpdate();
+
+                    m_Window->SetSeenRender();
+                    m_World->ManagedWorldRender();
+
+
+                    m_Window->SetPosFXRender();
+                    m_World->PaintRenderFrame();
+
+                    
+                    m_Window->SwapRenderBuffer();
+                }
+            }
+    };
 }

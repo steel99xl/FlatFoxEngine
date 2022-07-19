@@ -1,6 +1,9 @@
 #pragma once
 
-#include "FlatFoxEngine.hpp"
+#include "Imports/glew/include/GL/glew.h"
+#include "Imports/glfw/include/GLFW/glfw3.h"
+#include <thread>
+#include "Renderer.hpp"
 
 
 namespace FlatFoxWindow{
@@ -130,6 +133,7 @@ class Window{
         void SetMouseButtonArray(int button);
 
         inline std::array<int,32> GetMouseButtonArray() {return m_MouseButtons;}
+        inline std::array<double,2> GetMousePos(){std::array<double,2> i = {m_MouseX, m_MouseY}; return i;}
 
         inline void SetMousePos(double x, double y) {m_LastMouseX = m_MouseX; m_LastMouseY = m_MouseY; m_MouseX = x; m_MouseY = y;}
 

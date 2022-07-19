@@ -27,16 +27,13 @@ void TestWorld::Setup(){
     AdvancedCam.InvertVertical();
     AdvancedCam.LookRelative(m_MouseX, m_MouseY);
 
+    std::vector<std::string> TempShaders;
+    TempShaders.push_back("assets/Shaders/FrameVertex.shader");
+    TempShaders.push_back("assets/Shaders/FrameBuffer.shader");
 
-    m_FBO.Setup((int)m_Width, (int)m_Height,(int)m_Scale);
-    Frame.Setup(2);
-    Frame.SetShader("assets/Shaders/FrameVertex.shader");
-    Frame.SetShader("assets/Shaders/FrameBuffer.shader");
-    Frame.FinishShader();
-    Frame.Create2dQuad(0.0f,0.0f,0.0f, 0.0f,0.0f,0.0f, 2.0f,2.0f, 1.0f, 0.0f,0.0f,1.0f,1.0f, 5.0f);
-    Frame.SetTexture(0, "u_Texture");
-    Frame.SetFloatUniform("u_Size.height", m_Height);
-    Frame.SetFloatUniform("u_Size.width", m_Width);
+
+    m_FBO.Setup((int)m_Width, (int)m_Height,m_Scale,TempShaders);
+
 
     PlayerBlock.Setup(18, FlatFoxObject::SimpleObject::DynamicBuffer);
     Land.Setup(15000, FlatFoxObject::SimpleObject::StaticBuffer);
@@ -531,7 +528,10 @@ void TestWorld::OnRender(){
 
         }
 
-        m_FBO.Update((int)m_Width,(int)m_Height,(int)m_Scale);
+        m_Projection = AdvancedCam.GetProj();
+        m_View = AdvancedCam.GetView();
+
+        m_FBO.Update((int)m_Width,(int)m_Height,m_Scale);
 
         GLCall(glClearColor(0.60f, 0.60f, 0.75f, 0.0f));
 
@@ -539,7 +539,7 @@ void TestWorld::OnRender(){
         //Sun.BindBufferData();
         //Sun.SetColor(1.0f,0.9059f,0.0f, 1.0f);
         
-        Sun.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
+        Sun.SetDrawPos(m_Projection, m_View);
         //Sun.SetLight(Sun.GetLightColor(), Sun.GetPos());
         Sun.Paint();
 
@@ -547,19 +547,19 @@ void TestWorld::OnRender(){
 
         //Land.BindBufferData();
         
-        Land.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
+        Land.SetDrawPos(m_Projection, m_View);
         Land.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         Land.SetLight(OtherSuns.GetLightInfo(), OtherSuns.GetPos(), m_3dCamPos, 1);
         Land.Paint();
 
-        Platform.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
+        Platform.SetDrawPos(m_Projection, m_View);
         Platform.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         Platform.SetLight(OtherSuns.GetLightInfo(), OtherSuns.GetPos(), m_3dCamPos, 1);
         Platform.Paint();
 
 
         OtherSuns.BindBufferData();
-        OtherSuns.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
+        OtherSuns.SetDrawPos(m_Projection, m_View);
         //OtherSuns.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         OtherSuns.Paint();
 
@@ -567,7 +567,7 @@ void TestWorld::OnRender(){
         TealBlock.BindBufferData();
         //TealBlock.SetColor(0.471f, 0.318f, 0.176f, 1.0f);
         
-        TealBlock.SetDrawPos(AdvancedCam.GetProj();,AdvancedCam.GetView(););
+        TealBlock.SetDrawPos(m_Projection,m_View);
         TealBlock.SetLight(Sun.GetLightInfo(), Sun.GetPos(), m_3dCamPos);
         TealBlock.SetLight(OtherSuns.GetLightInfo(), OtherSuns.GetPos(), m_3dCamPos, 1);
         TealBlock.Paint();
@@ -577,7 +577,7 @@ void TestWorld::OnRender(){
         //Using this cube as as temp player for colision detection
         // This is only going to check colision with the single Land Object (IE the ground);
         // The position is only being set first so i can just call the cube object
-        PlayerBlock.SetDrawPos(AdvancedCam.GetProj();, AdvancedCam.GetView(););
+        PlayerBlock.SetDrawPos(m_Projection, m_View);
         if(PlayerBlock.GetColision()){
             PlayerBlock.SetColor(1.0f,0.0f,0.0f, 1.0f);
         } else {
@@ -608,6 +608,8 @@ void TestWorld::OnRender(){
 
 
 void TestWorld::PaintFrame(){
+    m_FBO.Render();
+    /*
     glActiveTexture(GL_TEXTURE0);
         //glBindTexture(GL_TEXTURE_2D, FrameBuffTexture);
     glBindTexture(GL_TEXTURE_2D, m_FBO.GetTexture());
@@ -615,6 +617,7 @@ void TestWorld::PaintFrame(){
     GLCall(glDisable(GL_DEPTH_TEST)); 
     Frame.BindBufferData();
     Frame.Paint();
+    */
 
 }
 

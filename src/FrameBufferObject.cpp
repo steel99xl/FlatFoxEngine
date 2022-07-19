@@ -4,7 +4,7 @@ FrameBufferObject::FrameBufferObject(){}
 
 FrameBufferObject::~FrameBufferObject(){}
 
-void FrameBufferObject::Setup(int width, int height, int scale){
+void FrameBufferObject::Setup(int width, int height, float scale, std::vector<std::string> ShaderVector){
     glGenFramebuffers(1, &m_FBO);
     GLCall(glBindFramebuffer(GL_FRAMEBUFFER ,m_FBO));
 
@@ -32,9 +32,20 @@ void FrameBufferObject::Setup(int width, int height, int scale){
         if(fboStatus != GL_FRAMEBUFFER_COMPLETE){
             std::cout << "ERROR FRAMEBUFFER " << fboStatus << std::endl;
         }
+    
+    m_Frame.Setup(2);
+    for(unsigned long i = 0; i < ShaderVector.size(); i++){
+        m_Frame.SetShader(ShaderVector.at(i).c_str());
+    }
+    m_Frame.FinishShader();
+    m_Frame.Create2dQuad(0.0f,0.0f,0.0f, 0.0f,0.0f,0.0f, 2.0f,2.0f, 1.0f, 0.0f,0.0f,1.0f,1.0f, 5.0f);
+    m_Frame.SetTexture(0, "u_Texture");
+    m_Frame.SetFloatUniform("u_Size.height", m_Height);
+    m_Frame.SetFloatUniform("u_Size.width", m_Width);
+    
 }
 
-void FrameBufferObject::Update(int width, int height, int scale){
+void FrameBufferObject::Update(int width, int height, float scale){
         GLCall(glBindFramebuffer(GL_FRAMEBUFFER,  m_FBO));
 
         // The Texture and render buffer are basicaly remade every frame so the resolution can change
@@ -55,4 +66,14 @@ void FrameBufferObject::Update(int width, int height, int scale){
 
         GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
         GLCall(glEnable(GL_DEPTH_TEST));
+}
+
+void FrameBufferObject::Render(){
+    glActiveTexture(GL_TEXTURE0);
+        //glBindTexture(GL_TEXTURE_2D, FrameBuffTexture);
+    glBindTexture(GL_TEXTURE_2D, this->m_FrameBufferTexture);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    GLCall(glDisable(GL_DEPTH_TEST)); 
+    this->m_Frame.BindBufferData();
+    this->m_Frame.Paint();
 }

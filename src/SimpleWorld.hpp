@@ -10,6 +10,11 @@ namespace FlatFoxWorld{
         std::unique_ptr<FlatFoxPhysics::PhysicsEngine> m_PhysicsFox;
         FlatFoxObject::SimpleObject m_Land;
 
+        // This is just so subsituting cams will be easier potentialy
+        glm::mat4 m_Projection, m_View;
+        // Each world must have 1 camera so this is it lol
+        Camera3D  m_MainCamera;
+
         // Legacy Varaible but still used
         bool m_running;
 
@@ -51,8 +56,26 @@ namespace FlatFoxWorld{
 
         // These be defined at the bottom so it can use the full class....
         virtual void Update();
+
         // uwu the internal update thats not supose to be over writen by the end user
-        inline void TheRealManagedUpdate(){};
+        inline void TheRealManagedUpdate(){
+            this->KeyInput();
+            this->MouseMove();
+            this->MouseClick();
+
+            this->Update();
+            
+            // The rendering will be called by the engine
+            //this->RenderWorld();
+            //this->PaintRenderFrame();
+
+        };
+
+
+        // This will allow for quick overhauls of the render pipeline
+        inline void ManagedWorldRender(){
+            this->RenderWorld();
+        };
 
 
     };

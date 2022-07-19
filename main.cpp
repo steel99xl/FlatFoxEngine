@@ -52,7 +52,7 @@ int main(){
     std::cout << glGetString(GL_VERSION) << std::endl;
     std::cout << "GL_SHADING_LANGUAGE_VERSION: " << glGetString (GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
-    
+
 
     World.Setup();
     //World.m_running = true;
@@ -84,6 +84,7 @@ int main(){
 
         World.OnUpdate(window.GetDeltaTime(), (float) window.GetScaledWidth(), (float) window.GetScaledHeight());
 
+        // Update FBO
         window.SetSeenRender();
         World.OnRender();
 
