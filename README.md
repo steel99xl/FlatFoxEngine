@@ -1,6 +1,4 @@
-# FlatFoxEngine
-A simple fox's game engine
+# FlatFoxEngine V0.0.1
+A simple fox's game engine in C++
 
-## Needed in Imports folder in src
-https://github.com/glfw/glfw.git
-https://github.com/nigels-com/glew.git
+was formerly the KaijuGL Engine
