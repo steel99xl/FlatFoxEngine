@@ -28,6 +28,9 @@ PhysicsEngine::PhysicsEngine(float GravityForce, float GravityX, float GravityY,
     m_Gravity.Z = GravityZ;
 
     m_Gravity.Speed = GravityForce;
+
+    PhysicsObjects.clear();
+    PhysicsObjects.resize(1);
 }
 
 PhysicsEngine::~PhysicsEngine(){
@@ -1354,30 +1357,18 @@ void PhysicsEngine::ThreadSkelington(std::vector<SimplePhysicsObject *> *Objects
     }
 }
 
-void PhysicsEngine::AddVisiblePhysicsObject(FlatFoxObject::SimpleObject *BaseObject, std::string UniqueID, std::string TypeID, enum PhysicsModle PhysicsModle) {
-    RenderObjects.push_back(BaseObject);
-    //PhysicsObjects.push_back(new SimplePhysicsObject(std::move(UniqueID), std::move(TypeID), RenderObjects.size()));
+void PhysicsEngine::AddSimplePhysicsObject(SimplePhysicsObject NewObject) {
+    //SimplePhysicsObject *Test = new SimplePhysicsObject(UniqueID,TypeID, BaseObject, IsPlayer);
+    this->PhysicsObjects.push_back(NewObject);
+    
+    //this->PhysicsObjects.at(this->PhysicsObjects.size()-1)->EngineVectorPos = this->PhysicsObjects.size();
 
-    switch(PhysicsModle){
-        case Cube:
-            PhysicsObjects.push_back(std::make_unique<SimplePhysicsObject>(std::move(UniqueID), std::move(TypeID), RenderObjects.size()));
-            //calculate minimum cube based on rendermodle
-            break;
-        case Sphear:
-            PhysicsObjects.push_back(std::make_unique<SimplePhysicsObject>(std::move(UniqueID), std::move(TypeID), RenderObjects.size()));
-            //calculate mimimum sphear based on rendermodle
-            break;
-        case RenderModle:
-            PhysicsObjects.push_back(std::make_unique<SimplePhysicsObject>(std::move(UniqueID), std::move(TypeID), RenderObjects.size()));
-            //just ask the rendr modle for its modles points,a and other physics info if any
-            break;
-        break;
-    }
+    //this->PhysicsObjects.at(this->PhysicsObjects.size()-1)->SetStarterPosition(BaseObject->GetPosAlt());
 
-}
 
-void PhysicsEngine::RemoveVisiblePhysicsObject(unsigned long ObjectPOSID){
-    RenderObjects.erase(RenderObjects.begin()+ObjectPOSID);
+};
+
+void PhysicsEngine::RemoveSimplePhysicsObject(unsigned long ObjectPOSID){
     PhysicsObjects.erase(PhysicsObjects.begin()+ObjectPOSID);
 };
 
@@ -1388,16 +1379,16 @@ void PhysicsEngine::Update(FlatFoxPhysics::ForceDirection UserInput) {
         m_ObjectPoolSize = PhysicsObjects.size()/m_ThreadLimit;
     }
     // This loop is going to be on the main phys thread just to insure the player get its input
-    std::vector<std::unique_ptr<SimplePhysicsObject> >::iterator ob = this->PhysicsObjects.begin();
+    std::vector<SimplePhysicsObject>::iterator ob = this->PhysicsObjects.begin();
     for(; ob != this->PhysicsObjects.end(); ob++){
         // set up auto threading to the pool limit
         //(*ob)->AddAppliedForce(this->GetGravity());
-       if((*ob)->IsPlayer){
-           std::cout << (*ob)->Position.X << " | " << (*ob)->Position.Y << " | " << (*ob)->Position.Z << std::endl;
-           (*ob)->AddAppliedForce(UserInput);
+       if((*ob).IsPlayer){
+           std::cout << (*ob).Position.X << " | " << (*ob).Position.Y << " | " << (*ob).Position.Z << std::endl;
+           (*ob).AddAppliedForce(UserInput);
        }
        // This is the prestaged movment
-        (*ob)->Move(); // This is to be removed once other threads care issued
+        (*ob).Move(); // This is to be removed once other threads care issued
     }
     // Dispatch object pools per thread and wait for them to finish
 
@@ -1427,7 +1418,7 @@ void PhysicsEngine::Update(FlatFoxPhysics::ForceDirection UserInput) {
 
     ob = this->PhysicsObjects.begin();
     for(; ob != this->PhysicsObjects.end(); ob++){
-        (*ob)->ApplyMovedPosition();
+        (*ob).ApplyMovedPosition();
     }
     // Quick Range check for interactinos
 

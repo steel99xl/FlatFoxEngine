@@ -35,6 +35,7 @@ namespace FlatFoxEngine{
         protected:
         FlatFoxWorld::SimpleWorld *m_World;
         FlatFoxWindow::Window *m_Window;
+        //FlatFoxPhysics::SimplePhysics *m_Physics;
 
         public:
 
@@ -44,6 +45,7 @@ namespace FlatFoxEngine{
             //This function will house the internal managment for the physics thread (Physics engine provided by m_World)
             inline void PhysicsThreadManagment(){};
 
+            // Mightbe come an override function but with a base plan if not overwriten
             inline void Setup(){};
 
             // Does the things

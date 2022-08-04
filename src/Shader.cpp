@@ -13,9 +13,9 @@ Shader::~Shader(){
 
 }
 
-void Shader::SetShader(const std::string &filePath){
+void Shader::SetShader(const std::string &filePath, int TotalLights){
     m_FilePath = filePath;
-    ShaderProgramSource source = ParseShader();
+    ShaderProgramSource source = ParseShader(TotalLights);
     //std::cout << "Test" << std::endl;
     //std::cout << source.shaderSource << std::endl;
     //std::cout << "End of Test" << std::endl;
@@ -102,7 +102,7 @@ int Shader::GetUniformLocation(const std::string &name) const {
 
 }
 
-ShaderProgramSource Shader::ParseShader(){
+ShaderProgramSource Shader::ParseShader(int TotalLights){
     std::ifstream File(m_FilePath);
     std::string lines;
     std::stringstream ss;
@@ -124,7 +124,12 @@ ShaderProgramSource Shader::ParseShader(){
             } else if(lines.find("geometry") != std::string::npos){
                 type = ShaderType::GEOMETRY;
             }
-        }  else {
+        } else if(lines.find("#MAX_POINT_LIGHT") != std::string::npos) {
+            std::string MaxPointLighs = "#define MAX_POINT_LIGHT ";
+            MaxPointLighs = MaxPointLighs + std::to_string(TotalLights);
+            lines = std::regex_replace( lines, std::regex("#MAX_POINT_LIGHT"),  MaxPointLighs);
+            ss << lines << "\n";
+        } else {
             ss << lines << "\n";
         //ss << lines << "\n";
         }

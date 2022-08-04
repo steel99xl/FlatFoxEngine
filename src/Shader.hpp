@@ -1,5 +1,6 @@
 #pragma once
 
+#include <regex>
 #include <fstream>
 #include <cstring>
 #include <sstream>
@@ -34,7 +35,7 @@ public:
     Shader();
     ~Shader();
 
-    void SetShader(const std::string &filePath);
+    void SetShader(const std::string &filePath, int TotalLights = 0);
 
     void Finish();
 
@@ -58,7 +59,7 @@ public:
     inline void SetCompiledShaders(std::vector<unsigned int> CompShaders){ CompiledShaders = CompShaders;}
 
 private:
-    ShaderProgramSource ParseShader();
+    ShaderProgramSource ParseShader(int TotalLights = 4);
 
 
     void CreateShader(ShaderType &type, std::string &shaderSource);

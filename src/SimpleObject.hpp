@@ -225,6 +225,8 @@ namespace FlatFoxObject {
 
         inline std::vector<Vertex> GetVerticies() { return m_Verticies; }
 
+        inline std::vector<Vertex> *GetVerticiesPointer() {return &m_Verticies;}
+
         inline int GetVerticiesCount() { return m_UsedQuads * 4; }
 
         inline std::vector<unsigned int> GetIndices() { return m_Indices; }
@@ -281,6 +283,10 @@ namespace FlatFoxObject {
 
         inline glm::vec3 GetPos() { return glm::vec3(m_X, m_Y, m_Z); }
 
+        inline float GetPosX(){return m_X;}
+        inline float GetPosY(){return m_Y;}
+        inline float GetPosZ(){return m_Z;}
+
         inline std::array<float,3> GetPosAlt(){std::array<float,3> Temp; Temp[0]=m_X;Temp[1]=m_Y;Temp[2]=m_Z; return Temp;}
 
         //inline FlatFoxPhysics::PhysicsPos GetPhysicsPos() {FlatFoxPhysics::PhysicsPos Output; Output.Input(m_X, m_Y, m_Z); return Output;}
@@ -303,7 +309,7 @@ namespace FlatFoxObject {
         //inline std::vector<FlatFoxPhysics::PhysicsPos> *GetVertexPositionsPointer(){return &m_SPVertecxPositions;};
         //inline std::vector<FlatFoxPhysics::PhysicsPos> *GetVertexNormlPositionsPointer(){return &m_SPVertecxNormlPositions;};
 
-        void SetShader(const std::string &filePath);
+        void SetShader(const std::string &filePath, int TotalLights = 0);
 
         void FinishShader();
 

@@ -120,7 +120,7 @@ void TestWorld::Setup(){
     */
 
     Land.SetShader("assets/Shaders/BasicVertex.shader");
-    Land.SetShader("assets/Shaders/BasicLighting.shader");
+    Land.SetShader("assets/Shaders/BasicLighting.shader", 20);
     Land.FinishShader();
 
     Land.SumAllWeights();
@@ -216,12 +216,12 @@ void TestWorld::Setup(){
     Land.SetPosition(-20.0f,0.0f,-20.0f);
     Land.SetColor(0.3373f, 0.4902f, 0.2745f, 1.0f);
     Land.SetMaterial(BasicMetalCube);
-    Land.PreFillLights(4);
+    Land.PreFillLights(20);
 
     Platform.SetPosition(8.0f, 5.0f, 8.0f);
     Platform.SetColor(0.6, 0.6, 0.7, 0.8);
     Platform.SetMaterial(BasicMetalCube);
-    Platform.PreFillLights(4);
+    Platform.PreFillLights(20);
 
     OtherSuns.SetPosition(30.0f,5.0f,30.0f);
     OtherSuns.SetColor(1.0f,0.0f,0.0f,1.0f);
@@ -232,11 +232,11 @@ void TestWorld::Setup(){
     TealBlock.SetPosition(8.0f,40.0f,8.0f);
     TealBlock.SetColor(0.5f, 0.75f, 0.75f, 1.0f);
     TealBlock.SetMaterial(BasicMetalCube);
-    TealBlock.PreFillLights(4);
+    TealBlock.PreFillLights(20);
 
-
+    PlayerBlock.SetPosition(0.0f,0.0f,0.0f);
     PlayerBlock.SetMaterial(BasicMetalCube);
-    PlayerBlock.PreFillLights(4);
+    PlayerBlock.PreFillLights(20);
 
     Land.BindBufferData();
     Platform.BindBufferData();
@@ -264,7 +264,8 @@ void TestWorld::Setup(){
     // Im Setting the BaseID for a player ID, the UUID can also beused if only 1 object is wanted for the player
     //BasicPhysics.SetPhysicsPlayerID(m_PlayerObjectID);
     // Just to show how 1 object is the main colision decider for the clones
-    BasePlayerandPushableObject.AddCollisionType(BaseNonMovableobjects);
+    BasePlayerandPushableObject.AddCollisionType(BaseNonMovableobjects.TYPE);
+    BasePlayerandPushableObject.AddCollisionType(BasePlayerandPushableObject.TYPE);
 
     // This needsa an effective iplementation in the physics engine not the object
     /*
@@ -272,7 +273,11 @@ void TestWorld::Setup(){
     Land.GenerateSimplePhysicsInfo();
     TealBlock.GenerateSimplePhysicsInfo();
     */
+    
 
+    //BasicPhysics.AddSimplePhysicsObject(new FlatFoxPhysics::SimplePhysicsObject("BluePlayerBLock", "Movable", &PlayerBlock, true));
+    BasicPhysics.PhysicsObjects.push_back(FlatFoxPhysics::SimplePhysicsObject("BluePlayerBLock", "Movable", &PlayerBlock, true));
+    FlatFoxPhysics::GeneratePhysicsInfoFromModle(&BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size()).RenderObjectPointPos, &BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size()).RenderObjectPointNormal, BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size()).RenderObject->GetVerticiesPointer());
     //BasicPhysics.Objects.push_back(new SimplePhysicsSphereObject("BluePlayerBox",m_PlayerObjectID, BasePlayerandPushableObject.ExportCollisionTypes(), PlayerBlock.GetVertexPositionsPointer(),PlayerBlock.GetVertexNormlPositionsPointer(), PlayerBlock.GetWeightsPointer(), true));
     //BasicPhysics.Objects.push_back(new SimplePhysicsSphereObject("TealBox",m_Box, BasePlayerandPushableObject.ExportCollisionTypes(), TealBlock.GetVertexPositionsPointer(), TealBlock.GetVertexNormlPositionsPointer(), TealBlock.GetWeightsPointer(), false));
     //BasicPhysics.Objects.push_back(new SimplePhysicsBoxObject("CrapCloud",m_Gound, BaseNonMovableobjects.ExportCollisionTypes(), Land.GetVertexPositionsPointer(), Land.GetVertexNormlPositionsPointer(), Land.GetWeightsPointer(), false));

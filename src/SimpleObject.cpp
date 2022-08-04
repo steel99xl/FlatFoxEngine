@@ -696,8 +696,8 @@ void SimpleObject::GenerateSimplePhysicsInfo() {
 }
  */
 
-void SimpleObject::SetShader(const std::string &filePath){
-        m_Shader->SetShader(filePath);
+void SimpleObject::SetShader(const std::string &filePath, int TotalLights){
+        m_Shader->SetShader(filePath, TotalLights);
 
         // this is just for testing
         //int samplers[] = {0, 1, 2};

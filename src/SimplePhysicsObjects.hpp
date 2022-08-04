@@ -7,7 +7,7 @@
 
 // Some basic physics objects useing the SimplePhysicsObject struct
 
-struct SimplePhysicsSphereObject : public FlatFoxPhysics::SimplePhysicsObject{
+class SimplePhysicsSphereObject : public FlatFoxPhysics::SimplePhysicsObject{
 
 protected:
     float m_Radius;
@@ -15,7 +15,7 @@ protected:
 
 public:
 
-    explicit SimplePhysicsSphereObject(std::string UniqueID = "NULL", std::string TypeID = "NULL",  unsigned long RenderObjectVectorPos = 0, bool IsPlayer = false, const std::vector<unsigned int> *PhysicsTypeReactionList = nullptr) : SimplePhysicsObject(UniqueID, TypeID, RenderObjectVectorPos, IsPlayer,PhysicsTypeReactionList) {
+    explicit SimplePhysicsSphereObject(std::string UniqueID = "NULL", std::string TypeID = "NULL",  FlatFoxObject::SimpleObject *RenderObject = nullptr, bool IsPlayer = false, const std::vector<unsigned int> *PhysicsTypeReactionList = nullptr) : SimplePhysicsObject(UniqueID, TypeID, RenderObject, IsPlayer,PhysicsTypeReactionList) {
         // Junk number that hopfully wont conflict with other peoples
         this->TYPE = 42069;
     };
@@ -27,13 +27,13 @@ public:
 
 };
 
-struct SimplePhysicsBoxObject : public FlatFoxPhysics::SimplePhysicsObject{
+class SimplePhysicsBoxObject : public FlatFoxPhysics::SimplePhysicsObject{
 protected:
     // C Should be used as the middle of the cube, or you can just use 4 points
     FlatFoxPhysics::PhysicsPoint A, B, C, D, E;
 public:
 
-    explicit SimplePhysicsBoxObject(std::string UniqueID = "NULL", std::string TypeID = "NULL",  unsigned long RenderObjectVectorPos = 0, bool IsPlayer = false, const std::vector<unsigned int> *PhysicsTypeReactionList = nullptr) : SimplePhysicsObject(UniqueID, TypeID, RenderObjectVectorPos, IsPlayer,PhysicsTypeReactionList){
+    explicit SimplePhysicsBoxObject(std::string UniqueID = "NULL", std::string TypeID = "NULL",  FlatFoxObject::SimpleObject *RenderObject = nullptr, bool IsPlayer = false, const std::vector<unsigned int> *PhysicsTypeReactionList = nullptr) : SimplePhysicsObject(UniqueID, TypeID, RenderObject, IsPlayer,PhysicsTypeReactionList){
         // Junk number to identify type
         this->TYPE = 69420;
     };
