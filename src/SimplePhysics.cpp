@@ -1357,7 +1357,7 @@ void PhysicsEngine::ThreadSkelington(std::vector<SimplePhysicsObject *> *Objects
     }
 }
 
-void PhysicsEngine::AddSimplePhysicsObject(SimplePhysicsObject NewObject) {
+void PhysicsEngine::AddSimplePhysicsObject(SimplePhysicsObject* NewObject) {
     //SimplePhysicsObject *Test = new SimplePhysicsObject(UniqueID,TypeID, BaseObject, IsPlayer);
     this->PhysicsObjects.push_back(NewObject);
     
@@ -1379,16 +1379,16 @@ void PhysicsEngine::Update(FlatFoxPhysics::ForceDirection UserInput) {
         m_ObjectPoolSize = PhysicsObjects.size()/m_ThreadLimit;
     }
     // This loop is going to be on the main phys thread just to insure the player get its input
-    std::vector<SimplePhysicsObject>::iterator ob = this->PhysicsObjects.begin();
+    std::vector<SimplePhysicsObject*>::iterator ob = this->PhysicsObjects.begin();
     for(; ob != this->PhysicsObjects.end(); ob++){
         // set up auto threading to the pool limit
         //(*ob)->AddAppliedForce(this->GetGravity());
-       if((*ob).IsPlayer){
-           std::cout << (*ob).Position.X << " | " << (*ob).Position.Y << " | " << (*ob).Position.Z << std::endl;
-           (*ob).AddAppliedForce(UserInput);
+       if((*ob)->IsPlayer){
+           std::cout << (*ob)->Position.X << " | " << (*ob)->Position.Y << " | " << (*ob)->Position.Z << std::endl;
+           (*ob)->AddAppliedForce(UserInput);
        }
        // This is the prestaged movment
-        (*ob).Move(); // This is to be removed once other threads care issued
+        (*ob)->Move(); // This is to be removed once other threads care issued
     }
     // Dispatch object pools per thread and wait for them to finish
 
@@ -1418,7 +1418,7 @@ void PhysicsEngine::Update(FlatFoxPhysics::ForceDirection UserInput) {
 
     ob = this->PhysicsObjects.begin();
     for(; ob != this->PhysicsObjects.end(); ob++){
-        (*ob).ApplyMovedPosition();
+        (*ob)->ApplyMovedPosition();
     }
     // Quick Range check for interactinos
 

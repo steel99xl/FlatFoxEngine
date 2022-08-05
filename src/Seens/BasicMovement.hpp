@@ -1,6 +1,7 @@
 #pragma once
 #include "../FlatFoxEngine.hpp"
 
+template<int a> struct SizeCheck;
     
 class TestWorld{
 

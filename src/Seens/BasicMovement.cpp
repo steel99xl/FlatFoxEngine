@@ -276,8 +276,11 @@ void TestWorld::Setup(){
     
 
     //BasicPhysics.AddSimplePhysicsObject(new FlatFoxPhysics::SimplePhysicsObject("BluePlayerBLock", "Movable", &PlayerBlock, true));
-    BasicPhysics.PhysicsObjects.push_back(FlatFoxPhysics::SimplePhysicsObject("BluePlayerBLock", "Movable", &PlayerBlock, true));
-    FlatFoxPhysics::GeneratePhysicsInfoFromModle(&BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size()).RenderObjectPointPos, &BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size()).RenderObjectPointNormal, BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size()).RenderObject->GetVerticiesPointer());
+    //std::cout << sizeof(FlatFoxPhysics::SimplePhysicsObject) << std::endl;
+    //std::cout << sizeof(FlatFoxPhysics::SimplePhysicsObject*) << std::endl;
+    BasicPhysics.PhysicsObjects.push_back(new FlatFoxPhysics::SimplePhysicsObject("BluePlayerBLock", "Movable", &PlayerBlock, true));
+    FlatFoxPhysics::GeneratePhysicsInfoFromModle(&BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size())->RenderObjectPointPos, &BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size())->RenderObjectPointNormal, BasicPhysics.PhysicsObjects.at(BasicPhysics.PhysicsObjects.size())->RenderObject->GetVerticiesPointer());
+
     //BasicPhysics.Objects.push_back(new SimplePhysicsSphereObject("BluePlayerBox",m_PlayerObjectID, BasePlayerandPushableObject.ExportCollisionTypes(), PlayerBlock.GetVertexPositionsPointer(),PlayerBlock.GetVertexNormlPositionsPointer(), PlayerBlock.GetWeightsPointer(), true));
     //BasicPhysics.Objects.push_back(new SimplePhysicsSphereObject("TealBox",m_Box, BasePlayerandPushableObject.ExportCollisionTypes(), TealBlock.GetVertexPositionsPointer(), TealBlock.GetVertexNormlPositionsPointer(), TealBlock.GetWeightsPointer(), false));
     //BasicPhysics.Objects.push_back(new SimplePhysicsBoxObject("CrapCloud",m_Gound, BaseNonMovableobjects.ExportCollisionTypes(), Land.GetVertexPositionsPointer(), Land.GetVertexNormlPositionsPointer(), Land.GetWeightsPointer(), false));

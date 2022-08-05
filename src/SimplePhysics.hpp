@@ -434,7 +434,7 @@ namespace FlatFoxPhysics {
 
         // The idea is I can ask the rendre object what physics objects are apart of it
         // The Render object in the physics engine are justa referance to the render engine so This should not manage their memory
-        std::vector<SimplePhysicsObject> PhysicsObjects;
+        std::vector<SimplePhysicsObject*> PhysicsObjects;
 
         inline float GetUpdateTime() { return m_DeltaTime; }
 
@@ -521,7 +521,7 @@ namespace FlatFoxPhysics {
         inline bool SubThreadSwitchStarter(bool StartState){return StartState;};
 
         // Add and Remove PhysicsObjects
-        void AddSimplePhysicsObject(SimplePhysicsObject NewObject);
+        void AddSimplePhysicsObject(SimplePhysicsObject *NewObject);
         void RemoveSimplePhysicsObject(unsigned long ObjectPOSID);
 
         void Update(FlatFoxPhysics::ForceDirection UserInput);
