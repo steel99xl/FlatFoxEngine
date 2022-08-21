@@ -17,4 +17,6 @@ cmake --install build/
 # Local test
 DESTDIR=appdir cmake --install build/
 ./build/usr/local/bin/LinuxWindow
+# Local installer package
+cmake --build build/ --target package
 ```
