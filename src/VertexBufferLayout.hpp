@@ -3,7 +3,7 @@
 #include <vector>
 #include <cstring>
 
-#include "Imports/glew/include/GL/glew.h"
+#include <GL/glew.h>
 #include "FlatFoxRenderWarnings.hpp"
 
 #include "VertexBuffer.hpp"

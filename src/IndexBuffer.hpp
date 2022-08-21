@@ -2,7 +2,7 @@
 // Created by steel99xl on 6/14/21.
 //
 #pragma once
-#include "Imports/glew/include/GL/glew.h"
+#include <GL/glew.h>
 #include "FlatFoxRenderWarnings.hpp"
 class IndexBuffer{
 protected:

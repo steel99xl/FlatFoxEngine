@@ -4,7 +4,7 @@
 
 #ifndef FLATFOXENGINE_FLATFOXRENDERWARNINGS_HPP
 #define FLATFOXENGINE_FLATFOXRENDERWARNINGS_HPP
-#include "Imports/glew/include/GL/glew.h"
+#include <GL/glew.h>
 #include <iostream>
 #include <functional>
 
