@@ -1,8 +1,12 @@
 #pragma once
-#include "VertexBuffer.hpp"
-#include "Imports/glew/include/GL/glew.h"
+
 #include <vector>
+#include <cstring>
+
+#include "Imports/glew/include/GL/glew.h"
 #include "FlatFoxRenderWarnings.hpp"
+
+#include "VertexBuffer.hpp"
 //#include "FlatFoxGL.hpp"
 
 struct VertexBufferElements{
