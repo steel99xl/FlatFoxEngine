@@ -46,7 +46,7 @@ class TestWorld{
 
 
         FlatFoxPhysics::PhysicsEngine BasicPhysics = FlatFoxPhysics::PhysicsEngine(2.0f ,0.0f,-1.0f,0.0f);
-
+        std::vector<FlatFoxPhysics::SimplePhysicsObject*> WorldPhysicsObjects;
 
         //Elements for Physics Engine
         std::string m_PlayerObjectID = "PlayerObject";

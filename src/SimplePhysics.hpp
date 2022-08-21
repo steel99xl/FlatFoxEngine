@@ -129,12 +129,12 @@ namespace FlatFoxPhysics {
 
 
     inline PhysicsPos MovePhysicsObject(PhysicsPos Object, ForceDirection NormalDir, float DeltaTime, float Speed = -1.0f){
-        Speed *= DeltaTime;
+        Speed = Speed * DeltaTime;
 
         if(Speed != -1.0f) {
-            NormalDir.X *= Speed;
-            NormalDir.Y *= Speed;
-            NormalDir.Z *= Speed;
+            NormalDir.X = NormalDir.X * Speed;
+            NormalDir.Y = NormalDir.Y * Speed;
+            NormalDir.Z = NormalDir.Z * Speed;
         }
 
         Object.X += NormalDir.X;
@@ -434,7 +434,7 @@ namespace FlatFoxPhysics {
 
         // The idea is I can ask the rendre object what physics objects are apart of it
         // The Render object in the physics engine are justa referance to the render engine so This should not manage their memory
-        std::vector<SimplePhysicsObject*> PhysicsObjects;
+        std::vector<SimplePhysicsObject*> *PhysicsObjects;
 
         inline float GetUpdateTime() { return m_DeltaTime; }
 
@@ -523,6 +523,10 @@ namespace FlatFoxPhysics {
         // Add and Remove PhysicsObjects
         void AddSimplePhysicsObject(SimplePhysicsObject *NewObject);
         void RemoveSimplePhysicsObject(unsigned long ObjectPOSID);
+
+        inline void SetPhysicsObjectVectorPointer(std::vector<SimplePhysicsObject*> *VectorPtr){
+            this->PhysicsObjects = VectorPtr;
+        }
 
         void Update(FlatFoxPhysics::ForceDirection UserInput);
 
