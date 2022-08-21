@@ -1,6 +1,6 @@
 #pragma once
-#include "Imports/glm/glm.hpp"
-#include "Imports/glm/gtc/matrix_transform.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "SimplePhysics.hpp"
 
  enum CamDirection{UP, DOWN, LEFT, RIGHT, FORWARD, BACK};
