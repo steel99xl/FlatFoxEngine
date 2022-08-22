@@ -19,6 +19,8 @@ set(SOURCES
 
 add_executable(LinuxWindow ${SOURCES})
 
+target_include_directories(LinuxWindow PRIVATE src/Imports/stb_image)
+
 target_link_libraries(LinuxWindow PRIVATE ${CONAN_LIBS})
 
 install(TARGETS LinuxWindow DESTINATION ${CMAKE_INSTALL_BINDIR})
