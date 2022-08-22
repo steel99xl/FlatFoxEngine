@@ -1,7 +1,8 @@
 # FlatFoxEngine V0.0.1
 A simple fox's game engine in C++
 
-was formerly the KaijuGL Engine
+# Conversion to FlatFoxMath Library and Development
+
 
 To compile with CMake:
 
