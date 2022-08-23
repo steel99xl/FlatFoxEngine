@@ -2,8 +2,8 @@
 //#include "VertexBuffer.hpp"
 //#include "VertexBufferLayout.hpp"
 //#include "FlatFoxGL.hpp"
-#include "Imports/glm/glm.hpp"
-#include "Imports/glm/gtc/matrix_transform.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "VertexArray.hpp"
 #include "VertexBuffer.hpp"
 #include "VertexBufferLayout.hpp"

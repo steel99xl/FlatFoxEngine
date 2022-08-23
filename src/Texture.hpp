@@ -1,6 +1,6 @@
 #pragma once
 #include "Renderer.hpp"
-#include "Imports/stb_image/stb_image.h"
+#include "stb_image.h"
 #include "FlatFoxRenderWarnings.hpp"
 //#include "FlatFoxGL.hpp"
 
