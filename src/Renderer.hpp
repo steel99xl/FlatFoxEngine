@@ -15,8 +15,7 @@
 #include <vector>
 #include <array>
 #include "FlatFoxRenderWarnings.hpp"
-#include "Imports/glm/glm.hpp"
-#include "Imports/glm/gtc/matrix_transform.hpp"
+#include "FlatFoxMath.hpp"
 //#include "Imports/imgui/imgui.h"
 //#include "Imports/imgui/imgui_impl_glfw.h"
 //#include "Imports/imgui/imgui_impl_opengl3.h"

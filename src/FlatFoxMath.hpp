@@ -1,6 +1,8 @@
 #pragma once
 #include <cmath>
-#include "glm/glm/glm.hpp"
+#include "Imports/glm/glm/glm.hpp"
+#include "Imports/glm/glm/gtc/matrix_transform.hpp"
+
 // FlatFoxEngine "math" extention to define types shared through out the engine
 namespace FlatFoxMath{
 
@@ -8,7 +10,7 @@ namespace FlatFoxMath{
         glm::vec3 Pos;
         double Weight;
 
-        Point(double Weight = 0.0, glm::vec3 Pos = glm::vec3(0.0,0.0,0.0)) : Weight(Weight), Pos(Pos){
+        Point(double Weight = 0.0, glm::vec3 Pos = glm::vec3(0.0,0.0,0.0)) : Pos(Pos), Weight(Weight){
 
         }
         Point& operator=(const Point& P){

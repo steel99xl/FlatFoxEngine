@@ -5,6 +5,7 @@
 #include <thread>
 #include <cstring>
 #include "SimpleObject.hpp"
+#include "FlatFoxMath.hpp"
 // THis is just for debuging
 #include <iostream>
 //#include "SimpleObject.hpp"
