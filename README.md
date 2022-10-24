@@ -7,16 +7,15 @@ To compile with Conan and CMake:
 
 ```bash
 # Install conan
+python3 -m venv
+source bin/activate.sh
 pip install conan
-# Install all needed dependencies inside a build folder
-CONAN_SYSREQUIRES_MODE=enabled conan install . --install-folder build --build missing
 # Build
-cmake -B build/ # or with ninja: cmake -B build/ -G Ninja
+cmake -B build/ -DCMAKE_BUILD_TYPE=Debug # or with ninja: cmake -B build/ -DCMAKE_BUILD_TYPE=Debug -G Ninja
 cmake --build build/
 cmake --install build/
 # Local test
 DESTDIR=appdir cmake --install build/
-./build/usr/local/bin/LinuxWindow
 # Local installer package
 cmake --build build/ --target package
 ```
